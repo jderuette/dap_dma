@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
     @RequestMapping("/")
     public String index() {
-        return " Yo tout le monde ^^ \n Bienvenue à tous >-<' ";
+        return " Yo tout le monde ^^ ";
     }
 }
