@@ -16,6 +16,7 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.model.Event;
+import com.google.api.services.calendar.model.EventDateTime;
 import com.google.api.services.calendar.model.Events;
 
 /**
@@ -39,7 +40,6 @@ public class Calendarservice {
     */
     @RequestMapping("/prochainevent")
     public String NextEvent(String UserKey) throws IOException, GeneralSecurityException {
-
         String allEvents = "";
         // Build a new authorized API client service.
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
@@ -47,7 +47,9 @@ public class Calendarservice {
                 Utils.getCredentials(HTTP_TRANSPORT, UserKey)).setApplicationName(APPLICATION_NAME).build();
 
         // List the next 10 events from the primary calendar.
+
         DateTime now = new DateTime(System.currentTimeMillis());
+        DateTime endDateTime = new DateTime("2015-05-28T17:00:00-07:00");
         Events events = service.events().list("primary").setMaxResults(10).setTimeMin(now).setOrderBy("startTime")
                 .setSingleEvents(true).execute();
         List<Event> items = events.getItems();
@@ -55,9 +57,10 @@ public class Calendarservice {
             allEvents = "Pas de prochains evenements.";
         } else {
             for (Event event : items) {
-                DateTime start = event.getStart().getDateTime();
+                EventDateTime start = event.getStart().setDateTime(endDateTime);
                 if (start == null) {
-                    start = event.getStart().getDate();
+                    start = event.getStart().setDateTime(endDateTime);
+
                 }
                 allEvents = allEvents + " -  " + event.getSummary() + "( " + start + ")\n";
 

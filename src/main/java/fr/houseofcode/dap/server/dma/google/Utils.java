@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.Charset;
+import java.nio.file.FileSystems;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +46,8 @@ public class Utils {
         return flow.loadCredential(UserKey);
     }
 
+    public static String Separator = FileSystems.getDefault().getSeparator();
+
     public static GoogleAuthorizationCodeFlow getFlow(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
         // TODO Auto-generated method stub
         // Build flow and trigger user authorization request.
@@ -57,7 +60,8 @@ public class Utils {
         //   throw new FileNotFoundException("Resource not found: " + CREDENTIALS_FILE_PATH);
         // }
 
-        File clientSecretsFic = new File(System.getProperty("user.home") + "\\dap\\credentials.json");
+        File clientSecretsFic = new File(System.getProperty("user.home") + "\\dap\\credentials.json" + Separator);
+
         Reader read = new InputStreamReader(new FileInputStream(clientSecretsFic), Charset.forName("UTF-8"));
 
         //InputStream ir = GoogleClientSecrets.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
