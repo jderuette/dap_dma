@@ -58,7 +58,7 @@ public class GmailService {
         List<Label> labels = listResponse.getLabels();
         String message = " ";
         if (labels.isEmpty()) {
-            return "Vous n'avez pas de label";
+            return "Vous n'avez aucun label.";
         } else {
 
             for (Label label : labels) {
