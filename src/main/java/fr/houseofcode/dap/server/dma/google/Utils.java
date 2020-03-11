@@ -21,7 +21,6 @@ import com.google.api.services.calendar.CalendarScopes;
 import com.google.api.services.gmail.GmailScopes;
 
 public class Utils {
-
     private static final String TOKENS_DIRECTORY_PATH = System.getProperty("user.home") + "\\dap\\tokens";
 
     /**
@@ -29,6 +28,7 @@ public class Utils {
      * If modifying these scopes, delete your previously saved tokens/ folder.
      */
     private static final List<String> SCOPES = new ArrayList<String>();
+
     //private static final String CREDENTIALS_FILE_PATH = System.getProperty("user.home") + "\\dap\\credentials.json";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
 
@@ -38,7 +38,6 @@ public class Utils {
     * @return An authorized Credential object.
     * @throws IOException If the credentials.json file cannot be found.
     */
-
     public static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT, String UserKey) throws IOException {
         // LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
         //return new AuthorizationCodeInstalledApp(getFlow(), receiver).authorize("user");

@@ -74,17 +74,21 @@ public class GmailService {
      * @throws GeneralSecurityException
      */
     public Integer UnreadedMail(String Userkey) throws IOException, GeneralSecurityException {
+        LOG.info("Récupération du nombre d'email pour l'utilisateur " + Userkey);
+
         LOG.debug("Accés aux emails non lus de l'utilisateur ... :  ");
         Integer result = 0;
         String user = "me";
         ListMessagesResponse listMResponse = getService(Userkey).users().messages().list(user)
                 .setQ("is:unread in:inbox -category:promotions -category:social").execute();
+
         List<Message> messages = listMResponse.getMessages();
 
         if (messages != null) {
             if (!messages.isEmpty()) {
                 result = messages.size();
             }
+            LOG.info("Nombre de messages : " + messages.size());
         }
         return result;
     }
