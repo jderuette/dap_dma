@@ -1,5 +1,5 @@
 /**
- * 
+
  */
 package fr.houseofcode.dap.server.dma;
 
@@ -13,22 +13,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.houseofcode.dap.server.dma.google.GmailService;
-
 /**
  * @author dimam
  *
  */
 @RestController
 public class EmailController {
-    @Autowired
-    private GmailService service;
-    private static final Logger LOG = LogManager.getLogger();
+	@Autowired
+	private GmailService service;
+	private static final Logger LOG = LogManager.getLogger();
 
-    @RequestMapping
-    public Integer displaynbUnreadEmail(@RequestParam String UserKey) throws IOException, GeneralSecurityException {
-        LOG.info("Affichage du nombre d'email pour l'utilisateur : " + UserKey);
-        return service.UnreadedMail(UserKey);
+	@RequestMapping
+	public Integer displaynbUnreadEmail(@RequestParam String UserKey) throws IOException, GeneralSecurityException {
+		LOG.info("Affichage du nombre d'email pour l'utilisateur : " + UserKey);
+		return service.UnreadedMail(UserKey);
 
-    }
+	}
+
+	public void setService(final GmailService gmailService) {
+		this.service = gmailService;
+
+	}
 }

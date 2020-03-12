@@ -1,5 +1,4 @@
-/**
- * 
+/** 
  */
 package fr.houseofcode.dap.server.dma;
 
@@ -10,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.houseofcode.dap.server.dma.google.GmailService;
+import fr.houseofcode.dap.server.dma.google.GmailServiceImpl;
 
 /**
  * @author dimam
@@ -20,7 +19,7 @@ import fr.houseofcode.dap.server.dma.google.GmailService;
 @RestController
 public class LabelController {
     @Autowired
-    private GmailService service;
+    private GmailServiceImpl service;
 
     @RequestMapping("/email/Labels")
     public String displaygetLabels(String UserKey) throws IOException, GeneralSecurityException {
