@@ -7,11 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+//TODO DMA by Djer |Audit Code| Prends en compte les remarques de CheckStyle !
+
 /**
  * @author dimam
  *
  */
-
 @Entity
 public class AppUser {
     @Id

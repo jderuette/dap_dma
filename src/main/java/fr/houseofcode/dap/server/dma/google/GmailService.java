@@ -19,6 +19,8 @@ import com.google.api.services.gmail.model.ListLabelsResponse;
 import com.google.api.services.gmail.model.ListMessagesResponse;
 import com.google.api.services.gmail.model.Message;
 
+//TODO DMA by Djer |Audit Code| Prends en compte les remarques de CheckStyle !
+
 /**
  * @author adminHOC
  *
@@ -30,6 +32,7 @@ public class GmailService {
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     private static final Logger LOG = LogManager.getLogger();
 
+    //TODO DMA by Djer |POO| Les paramètres doivent commencer par une minuscule.
     /**
      * allow the secured acess to Gmail.
      * @return a GmailService instance with secured transport.
@@ -44,6 +47,7 @@ public class GmailService {
         return service;
     }
 
+    //TODO DMA by Djer |POO| Les paramètres doivent commencer par une minuscule.
     /**.
      * allow a secured acess to Gmail
      * @return The labels of the inbox user
@@ -52,28 +56,33 @@ public class GmailService {
      */
     public String getLabels(String UserKey) throws IOException, GeneralSecurityException {
         // Print the labels in the user's account.
+        //TODO DMA by Djer |IDE| Encodage : attention tes fichiers étaient encodés en ISO-8859-2 lorsque tu as ajouter ce messages !
         LOG.debug("RÃ©cupÃ©ration des labels de l'utilisateur ... :  ");
         String user = "me";
         ListLabelsResponse listResponse = getService(UserKey).users().labels().list(user).execute();
         List<Label> labels = listResponse.getLabels();
         String message = " ";
         if (labels.isEmpty()) {
+            //TODO DMA by Djer |IDE| Evite les multiple retur dnas une même méthode. Alimentat ta variable "message" existante. Tes if/else évite déja d'éxécuter du code inutilement.
             return "Vous n'avez pas de label";
         } else {
 
             for (Label label : labels) {
+                //TODO DMA by Djer |Rest API| Dans une API évite de formater les messages. Renvoie une Liste et laisse le client (ou thymeLeaf) effectuer la présentation.
                 message = message + " \n " + label.getName();
             }
         }
         return message;
     }
 
+    //TODO DMA by Djer |POO| Les paramètres doivent commencer par une minuscule.
     /**
      * @return The UnreadedMail of the user inbox
      * @throws IOException
      * @throws GeneralSecurityException
      */
     public Integer UnreadedMail(String Userkey) throws IOException, GeneralSecurityException {
+        //TODO DMA by Djer |IDE| Encodage : attention tes fichiers étaient encodés en ISO-8859-2 lorsque tu as ajouter ce messages !
         LOG.debug("AccÃ©s aux emails non lus de l'utilisateur ... :  ");
         Integer result = 0;
         String user = "me";
@@ -100,6 +109,7 @@ public class GmailService {
        */
     public static List<Message> listMessagesMatchingQuery(Gmail service, String userId, String query)
             throws IOException {
+        //TODO DMA by Djer |IDE| Encodage : attention tes fichiers étaient encodés en ISO-8859-2 lorsque tu as ajouter ce messages !
         LOG.debug("RÃ©cupÃ©ration de la liste des messages de l'utilisateur ... :  ");
         ListMessagesResponse response = service.users().messages().list(userId).setQ(query).execute();
 
@@ -115,6 +125,7 @@ public class GmailService {
         }
 
         for (Message message : messages) {
+            //TODO DMA by Djer |POO| Pas de SysOut sur un serveur ! (soit une log.debug, soit supprimer cette ligne)
             System.out.println(message.toPrettyString());
         }
 

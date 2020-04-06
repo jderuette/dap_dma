@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.houseofcode.dap.server.dma.google.GmailService;
 
+//TODO DMA by Djer |Audit Code| Prends en compte les remarques de CheckStyle !
+
 /**
  * @author dimam
  *
@@ -22,6 +24,7 @@ public class EmailController {
     @Autowired
     private GmailService service;
 
+    //TODO DMA by Djer |POO| Les paramètres doivent commencer par une minuscule.
     @RequestMapping
     public Integer displaynbUnreadEmail(@RequestParam String UserKey) throws IOException, GeneralSecurityException {
         return service.UnreadedMail(UserKey);

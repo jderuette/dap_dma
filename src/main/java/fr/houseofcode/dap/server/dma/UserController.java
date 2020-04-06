@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import fr.houseofcode.dap.server.dma.data.AppUser;
 import fr.houseofcode.dap.server.dma.data.AppUserRepository;
 
+//TODO DMA by Djer |Audit Code| Prends en compte les remarques de CheckStyle !
+
 /**
  * @author dimam
  *
  */
-
 @RestController
 public class UserController {
     @Autowired

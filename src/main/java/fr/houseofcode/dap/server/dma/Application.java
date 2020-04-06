@@ -13,6 +13,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+//TODO DMA by Djer |Audit Code| Prends en compte les remarques de CheckStyle !
+//TODO DMA by Djer |Audit Code| PMD etait désactivé (et non configuré !)
+
 @SpringBootApplication
 public class Application {
 
@@ -20,6 +23,7 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
+    //TODO DMA by Djer |Spring| Cette méthode n'est plus très utile. Elle affiche le contenu du conteneur IOC, utile lors du test de mise en place de Spring.
     @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
         return args -> {

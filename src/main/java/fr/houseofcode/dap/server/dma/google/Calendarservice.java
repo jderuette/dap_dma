@@ -19,11 +19,12 @@ import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventDateTime;
 import com.google.api.services.calendar.model.Events;
 
+//TODO DMA by Djer |Audit Code| Prends en compte les remarques de CheckStyle !
+
 /**
  * @author adminHOC
  *
  */
-
 @RestController
 public class Calendarservice {
 
@@ -38,10 +39,13 @@ public class Calendarservice {
     * @throws IOException
     * @throws GeneralSecurityException
     */
+    //TODO DMA by Djer |Rest API| Nom de route pas top, "event/next" serait mieux.
+    //TODO DMA by Djer |POO| Les paramètres doivent commencer par une minuscule.
     @RequestMapping("/prochainevent")
     public String NextEvent(String UserKey) throws IOException, GeneralSecurityException {
         String allEvents = "";
         // Build a new authorized API client service.
+        //TODO DMA by Djer |POO| Seul les constante (static ET final) doivent être écrites en majuscules.
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         Calendar service = new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY,
                 Utils.getCredentials(HTTP_TRANSPORT, UserKey)).setApplicationName(APPLICATION_NAME).build();
@@ -57,11 +61,14 @@ public class Calendarservice {
             allEvents = "Pas de prochains evenements.";
         } else {
             for (Event event : items) {
+                //TODO DMA by Djer |API Google| Pourquoi modifier la date de début qui provient de Google par une date "bidon" ? 
                 EventDateTime start = event.getStart().setDateTime(endDateTime);
                 if (start == null) {
+                    //TODO DMA by Djer |API Google| Pourquoi modifier la date de début qui provient de Google par une date "bidon" ?
                     start = event.getStart().setDateTime(endDateTime);
 
                 }
+                //TODO DMA by Djer |Rest API| Dans une API évite de formater les messages. Renvoie une Liste et laisse le client (ou thymeLeaf) effectuer la présentation.
                 allEvents = allEvents + " -  " + event.getSummary() + "( " + start + ")\n";
 
             }

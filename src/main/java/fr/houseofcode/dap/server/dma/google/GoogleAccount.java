@@ -27,6 +27,8 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.javanet.NetHttpTransport;
 
+//TODO DMA by Djer |Audit Code| Prends en compte les remarques de CheckStyle !
+
 /**
  * @author dimam
  *

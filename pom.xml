@@ -6,39 +6,40 @@
 	<artifactId>server.dma</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Data Access Project</name>
-	
+
 	<parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.6.RELEASE</version>
-    </parent>
-    
-     <properties>
-        <java.version>1.8</java.version>
-    </properties>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.6.RELEASE</version>
+	</parent>
+
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        
-        <dependency>
-  			<groupId>org.springframework.boot</groupId>
-    		<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		
+
 		<dependency>
-  			<groupId>com.h2database</groupId>
-  			<artifactId>h2</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>com.google.api-client</groupId>
 			<artifactId>google-api-client</artifactId>
 			<version>1.23.0</version>
 		</dependency>
 
+		<!-- TODO DMA by Djer |Maven| Cette dépendance n'est plus utile depuis qu'on utilise le mode "serveur" pour l'authentification Google. -->
 		<dependency>
 			<groupId>com.google.oauth-client</groupId>
 			<artifactId>google-oauth-client-jetty</artifactId>
@@ -56,30 +57,30 @@
 			<artifactId>google-api-services-calendar</artifactId>
 			<version>v3-rev305-1.23.0</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-api</artifactId>
-			<version>2.9.1</version><!--$NO-MVN-MAN-VER$-->
+			<version>2.9.1</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
-			<version>2.9.1</version><!--$NO-MVN-MAN-VER$-->
+			<version>2.9.1</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
-			 <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
 		</plugins>
 	</build>
 
-
-
+	<!-- TODO DMA by Djer |JavaDoc| Il te manque le plugin de reporting "javadoc" pour la generer automatiquement -->
+	<!-- TODO DMA by Djer |Audit Code| Il te manque les plugin de reporting PMD/CheckStyle pour génére les rapports -->
 
 </project>
