@@ -26,6 +26,7 @@ public class EmailController {
     private GmailService service;
 
     //TODO DMA by Djer |POO| Les paramètres doivent commencer par une minuscule.
+    //TODO DMA by Djer |Spring| Il devrait y avoir en paramètre de l'annotation, l'URL exposé pour acceder à cette méthode. Comme il n'y a qu'une seul méthode, Spring l'expose par defaut via le nom du controller mais ca n'est pas top.
     @RequestMapping
     public Integer displaynbUnreadEmail(@RequestParam String UserKey) throws IOException, GeneralSecurityException {
         return service.UnreadedMail(UserKey);
