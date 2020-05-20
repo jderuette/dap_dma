@@ -21,8 +21,10 @@ import com.google.api.services.calendar.CalendarScopes;
 import com.google.api.services.gmail.GmailScopes;
 
 //TODO DMA by Djer |Audit Code| Prends en compte les remarques de CheckStyle !
+//TODO DMA by Djer |JavaDoc| Il manque la description de la classe
 
 public class Utils {
+    //TODO DMA by Djer |POO| Utilise le "System.getProperty("path.separator")" pour identifier les séparateurs de fichier de façon indépendante du Systeme d'Exploitation.
 
     private static final String TOKENS_DIRECTORY_PATH = System.getProperty("user.home") + "\\dap\\tokens";
 
@@ -53,11 +55,11 @@ public class Utils {
     public static String Separator = FileSystems.getDefault().getSeparator();
 
     public static GoogleAuthorizationCodeFlow getFlow(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
-        //TODO DMA by Djer |IDE| Supprime les TODO une fois que tu les as traités.
+        //TODO DMA by Djer |IDE| Supprime les TO-DO une fois que tu les as traités.
         // TODO Auto-generated method stub
         // Build flow and trigger user authorization request.
         // Load client secrets.
-        //TODO DMA by Djer |POO| Evite d'ajouter les scopes ici, il seront duppliqué à chaque passage dans la méthode. Créer un constructeur pour que ce code ne soit éxécuté qu'une seul fois.
+        //TODO DMA by Djer |POO| Evite d'ajouter les scopes ici, il seront duppliqués à chaque passage dans la méthode. Créer un constructeur pour que ce code ne soit éxécuté qu'une seul fois.
         SCOPES.add(CalendarScopes.CALENDAR_READONLY);
         SCOPES.add(GmailScopes.GMAIL_READONLY);
 
@@ -67,6 +69,7 @@ public class Utils {
         // }
 
         //TODO DMA by Djer |POO| Devrait être une constante de la classe.
+        //TODO DMA by Djer |POO| Utilise ta vairaible "Separator" pour identifier les séparateurs de fichier y compris entre les dossiers.
         File clientSecretsFic = new File(System.getProperty("user.home") + "\\dap\\credentials.json" + Separator);
 
         Reader read = new InputStreamReader(new FileInputStream(clientSecretsFic), Charset.forName("UTF-8"));

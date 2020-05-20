@@ -20,6 +20,8 @@ import com.google.api.services.calendar.model.EventDateTime;
 import com.google.api.services.calendar.model.Events;
 
 //TODO DMA by Djer |Audit Code| Prends en compte les remarques de CheckStyle !
+//TODO DMA by Djer |JavaDoc| Il manque la description de la classe
+//TODO DMA by Djer |POO| LE nom de la classe doit etre ne CamelCase "Service" doit donc commencer par une majuscule.
 
 /**
  * @author adminHOC
@@ -41,11 +43,12 @@ public class Calendarservice {
     */
     //TODO DMA by Djer |Rest API| Nom de route pas top, "event/next" serait mieux.
     //TODO DMA by Djer |POO| Les paramètres doivent commencer par une minuscule.
+    //TODO DMA by Djer |API Google| Tu ne devrais afifché que **un seul** next Event
     @RequestMapping("/prochainevent")
     public String NextEvent(String UserKey) throws IOException, GeneralSecurityException {
         String allEvents = "";
         // Build a new authorized API client service.
-        //TODO DMA by Djer |POO| Seul les constante (static ET final) doivent être écrites en majuscules.
+        //TODO DMA by Djer |POO| Seul les constantes (static ET final) doivent être écrites en majuscules.
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         Calendar service = new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY,
                 Utils.getCredentials(HTTP_TRANSPORT, UserKey)).setApplicationName(APPLICATION_NAME).build();

@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Bean;
 
 //TODO DMA by Djer |Audit Code| Prends en compte les remarques de CheckStyle !
 //TODO DMA by Djer |Audit Code| PMD etait désactivé (et non configuré !)
+//TODO DMA by Djer |JavaDoc| Il manque la description de la classe
 
 @SpringBootApplication
 public class Application {

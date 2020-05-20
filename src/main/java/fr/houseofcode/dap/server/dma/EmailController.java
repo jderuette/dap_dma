@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import fr.houseofcode.dap.server.dma.google.GmailService;
 
 //TODO DMA by Djer |Audit Code| Prends en compte les remarques de CheckStyle !
+//TODO DMA by Djer |JavaDoc| Il manque la description de la classe
 
 /**
  * @author dimam

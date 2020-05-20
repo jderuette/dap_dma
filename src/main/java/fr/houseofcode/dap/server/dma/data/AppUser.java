@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 //TODO DMA by Djer |Audit Code| Prends en compte les remarques de CheckStyle !
+//TODO DMA by Djer |JavaDoc| Il manque la description de la classe
 
 /**
  * @author dimam
@@ -27,6 +28,7 @@ public class AppUser {
         return id;
     }
 
+    //TODO DMA by Djer |JPA| ton ID est généré (@GeneratedValue), évite de laisser le setter acessible, un developpeur pourait faire une mauvaise utilsiation.
     /**
      * @param id the id to set
      */

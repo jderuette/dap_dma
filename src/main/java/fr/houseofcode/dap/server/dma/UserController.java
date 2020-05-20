@@ -12,6 +12,7 @@ import fr.houseofcode.dap.server.dma.data.AppUser;
 import fr.houseofcode.dap.server.dma.data.AppUserRepository;
 
 //TODO DMA by Djer |Audit Code| Prends en compte les remarques de CheckStyle !
+//TODO DMA by Djer |JavaDoc| Il manque la description de la classe
 
 /**
  * @author dimam

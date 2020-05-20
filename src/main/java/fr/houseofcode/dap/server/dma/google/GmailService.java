@@ -20,6 +20,7 @@ import com.google.api.services.gmail.model.ListMessagesResponse;
 import com.google.api.services.gmail.model.Message;
 
 //TODO DMA by Djer |Audit Code| Prends en compte les remarques de CheckStyle !
+//TODO DMA by Djer |JavaDoc| Il manque la description de la classe
 
 /**
  * @author adminHOC
@@ -56,19 +57,20 @@ public class GmailService {
      */
     public String getLabels(String UserKey) throws IOException, GeneralSecurityException {
         // Print the labels in the user's account.
-        //TODO DMA by Djer |IDE| Encodage : attention tes fichiers étaient encodés en ISO-8859-2 lorsque tu as ajouter ce messages !
+        //TODO DMA by Djer |IDE| Encodage : attention tes fichiers étaient encodés en ISO-8859-2 lorsque tu as ajouté ce messages !
+        //TODO DMA by Djer |Log4J| Contectualise tes messages " ... for userKey : " + UserKey".
         LOG.debug("RÃ©cupÃ©ration des labels de l'utilisateur ... :  ");
         String user = "me";
         ListLabelsResponse listResponse = getService(UserKey).users().labels().list(user).execute();
         List<Label> labels = listResponse.getLabels();
         String message = " ";
         if (labels.isEmpty()) {
-            //TODO DMA by Djer |IDE| Evite les multiple retur dnas une même méthode. Alimentat ta variable "message" existante. Tes if/else évite déja d'éxécuter du code inutilement.
+            //TODO DMA by Djer |IDE| Evite les multiple return dans une même méthode. Alimente ta variable "message" existante. Tes if/else évite déja d'éxécuter du code inutilement.
             return "Vous n'avez pas de label";
         } else {
 
             for (Label label : labels) {
-                //TODO DMA by Djer |Rest API| Dans une API évite de formater les messages. Renvoie une Liste et laisse le client (ou thymeLeaf) effectuer la présentation.
+                //TODO DMA by Djer |Rest API| Dans une API REST évite de formater les messages. Renvoie une Liste et laisse le client (ou thymeLeaf) effectuer la présentation.
                 message = message + " \n " + label.getName();
             }
         }
@@ -76,13 +78,15 @@ public class GmailService {
     }
 
     //TODO DMA by Djer |POO| Les paramètres doivent commencer par une minuscule.
+    //TODO DMA by Djer |POO| Les paramètres doivent commencer par une minuscule.
     /**
      * @return The UnreadedMail of the user inbox
      * @throws IOException
      * @throws GeneralSecurityException
      */
     public Integer UnreadedMail(String Userkey) throws IOException, GeneralSecurityException {
-        //TODO DMA by Djer |IDE| Encodage : attention tes fichiers étaient encodés en ISO-8859-2 lorsque tu as ajouter ce messages !
+        //TODO DMA by Djer |IDE| Encodage : attention tes fichiers étaient encodés en ISO-8859-2 lorsque tu as ajouté ce message !
+        //TODO DMA by Djer |Log4J| Contectualise tes messages " ... for userKey : " + UserKey".
         LOG.debug("AccÃ©s aux emails non lus de l'utilisateur ... :  ");
         Integer result = 0;
         String user = "me";
@@ -90,6 +94,7 @@ public class GmailService {
                 .setQ("is:unread in:inbox -category:promotions -category:social").execute();
         List<Message> messages = listMResponse.getMessages();
 
+        //TODO DMA by Djer |API Google| Il faut prendre en compte la pagination des résultats. Ici un utilisateur qui a plus de 100 email non lut verra affiché "100".
         if (messages != null) {
             if (!messages.isEmpty()) {
                 result = messages.size();
@@ -109,7 +114,8 @@ public class GmailService {
        */
     public static List<Message> listMessagesMatchingQuery(Gmail service, String userId, String query)
             throws IOException {
-        //TODO DMA by Djer |IDE| Encodage : attention tes fichiers étaient encodés en ISO-8859-2 lorsque tu as ajouter ce messages !
+        //TODO DMA by Djer |IDE| Encodage : attention tes fichiers étaient encodés en ISO-8859-2 lorsque tu as ajouté ce message !
+        //TODO DMA by Djer |Log4J| Contectualise tes messages " ... for userKey : " + UserKey".
         LOG.debug("RÃ©cupÃ©ration de la liste des messages de l'utilisateur ... :  ");
         ListMessagesResponse response = service.users().messages().list(userId).setQ(query).execute();
 
