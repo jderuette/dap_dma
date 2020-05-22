@@ -27,12 +27,17 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.javanet.NetHttpTransport;
 
+//TODO DMA by Djer |Audit Code| Prends en compte les remarques de CheckStyle !
+//TODO DMA by Djer |JavaDoc| Il manque la description de la classe
+
 /**
  * @author dimam
  *
  */
 @Controller
 public class GoogleAccount {
+
+    //TODO DMA by Djer |POO| Par defaut un attribut à la même visibilité que la classe, donc "public" ici. Il devrait etre privé. Il devrait aussi être static
     final Logger LOG = LogManager.getLogger();
 
     private static final int SENSIBLE_DATA_FIRST_CHAR = 0;
@@ -69,6 +74,7 @@ public class GoogleAccount {
                             + credential.getAccessToken().substring(SENSIBLE_DATA_FIRST_CHAR, SENSIBLE_DATA_LAST_CHAR));
                 }
             }
+            //TODO DMA by Djer |API Google| Tu devrais ajouter ton "user" dans ta BDD ici.
             // onSuccess(request, resp, credential);
         } catch (IOException e) {
             LOG.error("Exception while trying to store user Credential", e);

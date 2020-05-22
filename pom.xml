@@ -40,6 +40,7 @@
 			<version>1.23.0</version>
 		</dependency>
 
+		<!-- TODO DMA by Djer |Maven| Cette dépendance n'est plus utile depuis qu'on utilise le mode "serveur" pour l'authentification Google. -->
 		<dependency>
 			<groupId>com.google.oauth-client</groupId>
 			<artifactId>google-oauth-client-jetty</artifactId>

@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.houseofcode.dap.server.dma.google.Calendarservice;
 
+//TODO DMA by Djer |Audit Code| Prends en compte les remarques de CheckStyle !
+//TODO DMA by Djer |JavaDoc| Il manque la description de la classe
+
 /**
  * @author dimam
  *
@@ -22,6 +25,7 @@ public class EventController {
     @Autowired
     private Calendarservice service;
 
+    //TODO DMA by Djer |POO| Les paramètres doivent commencer par une minuscule.
     @RequestMapping("/Calendar/Events")
     public String displayNextEvent(@RequestParam String UserKey) throws IOException, GeneralSecurityException {
         return service.NextEvent(UserKey);
