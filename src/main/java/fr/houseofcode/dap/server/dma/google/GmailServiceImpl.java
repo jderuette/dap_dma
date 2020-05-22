@@ -28,104 +28,111 @@ import fr.houseofcode.dap.server.dma.GmailService;
 @Service
 public class GmailServiceImpl implements GmailService {
 
-	private static final String APPLICATION_NAME = "Gmail API Java Quickstart";
-	private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
-	private static final Logger LOG = LogManager.getLogger();
+    private static final String APPLICATION_NAME = "Gmail API Java Quickstart";
+    private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
+    private static final Logger LOG = LogManager.getLogger();
 
-	/**
-	 * allow the secured acess to Gmail.
-	 * @return a GmailService instance with secured transport.
-	 * @throws IOException if the sent or received message is broken.
-	 * @throws GeneralSecurityException i there's a security failure.
-	 */
-	private Gmail getService(String UserKey) throws IOException, GeneralSecurityException {
-		LOG.debug("Connexion au service utilisateur de Google ... :  ");
-		final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-		Gmail service = new Gmail.Builder(HTTP_TRANSPORT, JSON_FACTORY, Utils.getCredentials(HTTP_TRANSPORT, UserKey))
-				.setApplicationName(APPLICATION_NAME).build();
-		return service;
-	}
+    /**
+     * allow the secured acess to Gmail.
+     * @return a GmailService instance with secured transport.
+     * @throws IOException if the sent or received message is broken.
+     * @throws GeneralSecurityException i there's a security failure.
+     */
+    private Gmail getService(String UserKey) throws IOException, GeneralSecurityException {
+        //TODO DMA by Djer |Log4J| Contextualise tes messages " ... for userKey : " + UserKey".
+        LOG.debug("Connexion au service utilisateur de Google ... :  ");
+        final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+        Gmail service = new Gmail.Builder(HTTP_TRANSPORT, JSON_FACTORY, Utils.getCredentials(HTTP_TRANSPORT, UserKey))
+                .setApplicationName(APPLICATION_NAME).build();
+        return service;
+    }
 
-	/**.
-	 * allow a secured acess to Gmail
-	 * @return The labels of the inbox user
-	 * @throws IOException ins an output or output exception for some instances.
-	 * @throws GeneralSecurityException is a generic security exception.
-	 */
-	@Override
-	public String getLabels(String UserKey) throws IOException, GeneralSecurityException {
-		// Print the labels in the user's account.
-		LOG.debug("Récupération des labels de l'utilisateur ... :  ");
-		String user = "me";
-		ListLabelsResponse listResponse = getService(UserKey).users().labels().list(user).execute();
-		List<Label> labels = listResponse.getLabels();
-		String message = " ";
-		if (labels.isEmpty()) {
-			return "Vous n'avez aucun label.";
-		} else {
+    /**.
+     * allow a secured acess to Gmail
+     * @return The labels of the inbox user
+     * @throws IOException ins an output or output exception for some instances.
+     * @throws GeneralSecurityException is a generic security exception.
+     */
+    @Override
+    public String getLabels(String UserKey) throws IOException, GeneralSecurityException {
+        //TODO DMA by Djer |POO| Ce commentaire est devenu faux
+        // Print the labels in the user's account.
+        //TODO DMA by Djer |Log4J| Contextualise tes messages " ... for userKey : " + UserKey".
+        LOG.debug("Récupération des labels de l'utilisateur ... :  ");
+        String user = "me";
+        ListLabelsResponse listResponse = getService(UserKey).users().labels().list(user).execute();
+        List<Label> labels = listResponse.getLabels();
+        String message = " ";
+        if (labels.isEmpty()) {
+            return "Vous n'avez aucun label.";
+        } else {
 
-			for (Label label : labels) {
-				message = message + " \n " + label.getName();
-			}
-		}
-		return message;
-	}
+            for (Label label : labels) {
+                message = message + " \n " + label.getName();
+            }
+        }
+        return message;
+    }
 
-	/**
-	 * @return The UnreadedMail of the user inbox
-	 * @throws IOException
-	 * @throws GeneralSecurityException
-	 */
-	@Override
-	public Integer UnreadedMail(String Userkey) throws IOException, GeneralSecurityException {
-		LOG.info("Récupération du nombre d'email pour l'utilisateur " + Userkey);
+    /**
+     * @return The UnreadedMail of the user inbox
+     * @throws IOException
+     * @throws GeneralSecurityException
+     */
+    @Override
+    public Integer UnreadedMail(String Userkey) throws IOException, GeneralSecurityException {
+        LOG.info("Récupération du nombre d'email pour l'utilisateur " + Userkey);
 
-		LOG.debug("Accés aux emails non lus de l'utilisateur ... :  ");
-		Integer result = 0;
-		String user = "me";
-		ListMessagesResponse listMResponse = getService(Userkey).users().messages().list(user)
-				.setQ("is:unread in:inbox -category:promotions -category:social").execute();
+        //TODO DMA by Djer |Log4J|  Cette Log est redondante avec celle du dessus. Quelqu'un lisant les logs "debug" vera forc�ment les logs Info car le niveau "info" est plus �l�v� que "debug".
+        LOG.debug("Accés aux emails non lus de l'utilisateur ... :  ");
+        Integer result = 0;
+        String user = "me";
+        ListMessagesResponse listMResponse = getService(Userkey).users().messages().list(user)
+                .setQ("is:unread in:inbox -category:promotions -category:social").execute();
 
-		List<Message> messages = listMResponse.getMessages();
+        List<Message> messages = listMResponse.getMessages();
 
-		if (messages != null) {
-			if (!messages.isEmpty()) {
-				result = messages.size();
-			}
-			LOG.info("Nombre de messages : " + messages.size());
-		}
-		return result;
-	}
+        if (messages != null) {
+            if (!messages.isEmpty()) {
+                result = messages.size();
+            }
+            //TODO DMA by Djer |Log4J| Contextualise tes messages " ... for userKey : " + UserKey".
+            LOG.info("Nombre de messages : " + messages.size());
+        }
+        return result;
+    }
 
-	/**
-	   * List all Messages of the user's mailbox matching the query.
-	   *
-	   * @param service Authorized Gmail API instance.
-	   * @param userId User's email address. The special value "me"
-	   * can be used to indicate the authenticated user.
-	   * @param query String used to filter the Messages listed.
-	   * @throws IOException
-	   */
-	public static List<Message> listMessagesMatchingQuery(Gmail service, String userId, String query)
-			throws IOException {
-		LOG.debug("Récupération de la liste des messages de l'utilisateur ... :  ");
-		ListMessagesResponse response = service.users().messages().list(userId).setQ(query).execute();
+    /**
+       * List all Messages of the user's mailbox matching the query.
+       *
+       * @param service Authorized Gmail API instance.
+       * @param userId User's email address. The special value "me"
+       * can be used to indicate the authenticated user.
+       * @param query String used to filter the Messages listed.
+       * @throws IOException
+       */
+    public static List<Message> listMessagesMatchingQuery(Gmail service, String userId, String query)
+            throws IOException {
+        //TODO DMA by Djer |Log4J| Contextualise tes messages " ... for userKey : " + userId".
+        LOG.debug("Récupération de la liste des messages de l'utilisateur ... :  ");
+        ListMessagesResponse response = service.users().messages().list(userId).setQ(query).execute();
 
-		List<Message> messages = new ArrayList<Message>();
-		while (response.getMessages() != null) {
-			messages.addAll(response.getMessages());
-			if (response.getNextPageToken() != null) {
-				String pageToken = response.getNextPageToken();
-				response = service.users().messages().list(userId).setQ(query).setPageToken(pageToken).execute();
-			} else {
-				break;
-			}
-		}
+        List<Message> messages = new ArrayList<Message>();
+        while (response.getMessages() != null) {
+            messages.addAll(response.getMessages());
+            if (response.getNextPageToken() != null) {
+                String pageToken = response.getNextPageToken();
+                response = service.users().messages().list(userId).setQ(query).setPageToken(pageToken).execute();
+            } else {
+                break;
+            }
+        }
 
-		for (Message message : messages) {
-			System.out.println(message.toPrettyString());
-		}
+        for (Message message : messages) {
+            //TODO DMA by Djer |Log4J| Pas de SysOut sur un serveur ! Eventuellement une log (en debug ?)
+            System.out.println(message.toPrettyString());
+        }
 
-		return messages;
-	}
+        return messages;
+    }
 }

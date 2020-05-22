@@ -41,6 +41,7 @@ public class GmailService {
      * @throws GeneralSecurityException i there's a security failure.
      */
     private Gmail getService(String UserKey) throws IOException, GeneralSecurityException {
+        //TODO DMA by Djer |Log4J| contextualise tesm essages de log "for userKey + " UserKey.
         LOG.debug("Connexion au service utilisateur de Google ... :  ");
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         Gmail service = new Gmail.Builder(HTTP_TRANSPORT, JSON_FACTORY, Utils.getCredentials(HTTP_TRANSPORT, UserKey))
